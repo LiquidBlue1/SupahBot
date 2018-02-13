@@ -7,34 +7,34 @@ var WordService = require('./components/wordservice.js');
 var WeatherService = require('./components/weatherservice.js');
 
 var commands = {
-  '!video': {
+  '-video': {
     execute: getVideo,
     description: 'get a youtube video by search word'
   },
-  '!weather': {
+  '-weather': {
     execute: getWeather,
     description: 'get current weather for the given city, defaults to Stockholm'
   },
-  '!roll': {
+  '-roll': {
     execute: roll,
     description: 'roll from 1-100'
   },
-  '!help': {
+  '-help': {
     execute: showHelp
   },
-  '!words': {
+  '-words': {
     execute: countWordsByUser,
     description: 'get the most popular words for user of the given username, defaults to your username'
   },
-  '!queue': {
+  '-play': {
     execute: doQueue,
     description: 'queue your song'
   },
-  '!voteskip': {
+  '-skip': {
     execute: voteSkip,
     description: 'vote to skip the current song'
   },
-  '!song': {
+  '-song': {
     execute: showSong,
     description: 'get the current song'
   }
@@ -172,10 +172,10 @@ function init() {
   Helper.keys('apikeys', ['discord']).then(keys => {
     Bot.login(keys.discord);
 
-    Queue = registerService(Queue, ['!queue', '!voteskip', '!song']);
-    TrackHelper = registerService(TrackHelper, ['!queue', '!video']);
-    WordService = registerService(WordService, ['!words']);
-    WeatherService = registerService(WeatherService, ['!weather']);
+    Queue = registerService(Queue, ['-play', '-skip', '-song']);
+    TrackHelper = registerService(TrackHelper, ['-play', '-video']);
+    WordService = registerService(WordService, ['-words']);
+    WeatherService = registerService(WeatherService, ['-weather']);
   }).catch(console.error);
 }
 
